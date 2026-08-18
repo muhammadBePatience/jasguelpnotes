@@ -12,7 +12,7 @@
    ========================================================================== */
 
 /* BUILD:VERSION */
-const VERSION = '54081be4';
+const VERSION = '7b35ce61';
 /* /BUILD:VERSION */
 
 const CACHE = 'lecturehub-' + VERSION;
@@ -41,6 +41,8 @@ const PRECACHE = [
   "index.html",
   "lecture.html",
   "manifest.webmanifest",
+  "mockups/mockup-academic.html",
+  "mockups/mockup-dark.html",
   "quiz.html"
 ];
 /* /BUILD:PRECACHE */

@@ -10,188 +10,194 @@ window.CONTENT = {
   },
   "courses": [
     {
-      "id": "cs240",
-      "code": "CS 240",
-      "name": "Data Structures & Algorithms",
-      "instructor": "Dr. A. Rahman",
+      "id": "math",
+      "code": "MATH",
+      "name": "Mathematics",
+      "instructor": "",
       "term": "Fall 2026",
       "lectures": [
         {
-          "id": "week-01-asymptotic-analysis",
-          "title": "Asymptotic Analysis",
-          "summary": "Big-O, Big-Theta, and what \"amortized\" actually means",
-          "date": "2026-09-08",
-          "week": "1",
-          "weekLabel": "Week 1",
+          "id": "example-lecture",
+          "title": "Example lecture — Limits",
+          "summary": "A sample showing the format. Delete this file once you add your own.",
+          "date": "",
+          "week": "0",
+          "weekLabel": "Week 0",
           "topics": [
-            "complexity",
-            "big-o",
-            "amortized"
+            "example",
+            "limits",
+            "calculus"
           ],
-          "notesHtml": "<h3>Why we measure this way</h3>\n<p>We care about how a program's cost <strong>grows</strong> with the input size, not how many milliseconds it took on one particular laptop. Constants and hardware change; the growth rate doesn't.</p>\n<h3>The three bounds</h3>\n<ul>\n<li><strong>O(f)</strong> — upper bound. \"It costs at most about f.\"</li>\n<li><strong>Ω(f)</strong> — lower bound. \"It costs at least about f.\"</li>\n<li><strong>Θ(f)</strong> — tight bound. Both of the above at once.</li>\n</ul>\n<p>In everyday conversation people say \"Big-O\" when they usually mean Θ. Be precise in exams, relaxed in the hallway.</p>\n<h3>Amortized cost</h3>\n<p>Amortized is <em>not</em> the same as average. Average is about a distribution of inputs; amortized is a worst-case guarantee spread over a sequence of operations.</p>\n<p>A dynamic array doubles its capacity when full. That one resize is O(n), but it only happens after n cheap pushes, so the cost spreads out:</p>\n<pre><code>push  push  push  push … push (resize, expensive)\n 1     1     1     1        n</code></pre>\n<p>Total for n pushes is O(n), so each push is <strong>O(1) amortized</strong>.</p>\n<blockquote><p>Rule of thumb: if an expensive step \"pays\" for the many cheap steps that preceded it, the amortized cost is cheap.</p></blockquote>\n<h3>Common growth rates, slowest-growing first</h3>\n<table><thead><tr><th>Notation</th><th>Name</th><th>Example</th></tr></thead><tbody><tr><td>O(1)</td><td>constant</td><td>array index</td></tr><tr><td>O(log n)</td><td>logarithmic</td><td>binary search</td></tr><tr><td>O(n)</td><td>linear</td><td>one pass over a list</td></tr><tr><td>O(n log n)</td><td>linearithmic</td><td>merge sort</td></tr><tr><td>O(n²)</td><td>quadratic</td><td>naive nested loops</td></tr></tbody></table>",
+          "notesHtml": "<p>This lecture is here to show you what a lecture file looks like. Open <code>data/lectures/math/example-lecture.md</code> and compare it with this page.</p>\n<h3>What a limit actually says</h3>\n<p><strong>lim(x→a) f(x) = L</strong> means: we can get f(x) as close to L as we like by taking x close enough to a. Note what it does <em>not</em> say — nothing about f(a) itself. The function needn't even be defined there.</p>\n<h3>Why 0/0 isn't an answer</h3>\n<p>When substitution gives 0/0, that's an <em>indeterminate form</em> — it means \"not enough information yet\", not \"undefined\". Do more work:</p>\n<ol>\n<li>Factor and cancel</li>\n<li>Multiply by the conjugate (when roots are involved)</li>\n<li>Divide through by the highest power of x (for limits at infinity)</li>\n</ol>\n<p>For example:</p>\n<pre><code>lim(x→2) (x² − 4)/(x − 2)\n      = lim(x→2) (x − 2)(x + 2)/(x − 2)\n      = lim(x→2) (x + 2)\n      = 4</code></pre>\n<p>The cancellation is legal because x ≠ 2 while approaching 2 — we never actually divide by zero.</p>\n<blockquote><p>A limit exists only if the left-hand and right-hand limits agree. If they disagree, the limit does not exist, no matter how well-behaved each side is.</p></blockquote>",
           "resources": [
             {
-              "label": "Lecture slides (PDF)",
+              "label": "Slides",
               "url": "#"
             },
             {
-              "label": "Recording",
-              "url": "#"
-            },
-            {
-              "label": "Problem set 1",
+              "label": "Textbook section",
               "url": "#"
             }
           ],
           "flashcards": [
             {
-              "q": "What does amortized O(1) mean?",
-              "a": "Any sequence of n operations costs O(n) in total, even if one individual operation is expensive."
+              "q": "What does 0/0 tell you when evaluating a limit?",
+              "a": "Nothing yet — it's an indeterminate form, meaning you need to factor, rationalise or otherwise simplify before concluding."
             },
             {
-              "q": "How is Θ different from O?",
-              "a": "O is only an upper bound; Θ means the bound is tight — the cost grows at that rate both above and below."
+              "q": "When does a limit fail to exist?",
+              "a": "When the left-hand and right-hand limits disagree."
             },
             {
-              "q": "Why is pushing to a dynamic array O(1) amortized rather than O(n)?",
-              "a": "Resizing doubles the capacity, so an expensive resize only happens after n cheap pushes; the cost spreads across them."
-            },
-            {
-              "q": "Is amortized the same as average-case?",
-              "a": "No. Average-case is about a distribution of inputs; amortized is a worst-case guarantee across a sequence of operations."
+              "q": "Does lim(x→a) f(x) depend on the value of f(a)?",
+              "a": "No. The limit describes behaviour approaching a; f(a) may differ or be undefined entirely."
             }
           ],
-          "searchText": "asymptotic analysis big-o, big-theta, and what \"amortized\" actually means complexity big-o amortized why we measure this way we care about how a program's cost grows with the input size, not how many milliseconds it took on one particular laptop. constants and hardware change; the growth rate doesn't. the three bounds o(f) — upper bound. \"it costs at most about f.\" ω(f) — lower bound. \"it costs at least about f.\" θ(f) — tight bound. both of the above at once. in everyday conversation people say \"big-o\" when they usually mean θ. be precise in exams, relaxed in the hallway. amortized cost amortized is not the same as average. average is about a distribution of inputs; amortized is a worst-case guarantee spread over a sequence of operations. a dynamic array doubles its capacity when full. that one resize is o(n), but it only happens after n cheap pushes, so the cost spreads out: push push push push … push (resize, expensive) 1 1 1 1 n total for n pushes is o(n), so each push is o(1) amortized . rule of thumb: if an expensive step \"pays\" for the many cheap steps that preceded it, the amortized cost is cheap. common growth rates, slowest-growing first notation name example o(1) constant array index o(log n) logarithmic binary search o(n) linear one pass over a list o(n log n) linearithmic merge sort o(n²) quadratic naive nested loops what does amortized o(1) mean? any sequence of n operations costs o(n) in total, even if one individual operation is expensive. how is θ different from o? o is only an upper bound; θ means the bound is tight — the cost grows at that rate both above and below. why is pushing to a dynamic array o(1) amortized rather than o(n)? resizing doubles the capacity, so an expensive resize only happens after n cheap pushes; the cost spreads across them. is amortized the same as average-case? no. average-case is about a distribution of inputs; amortized is a worst-case guarantee across a sequence of operations."
-        },
-        {
-          "id": "week-02-arrays-and-linked-lists",
-          "title": "Arrays & Linked Lists",
-          "summary": "Trade-offs, cache locality, and when a linked list is actually worth it",
-          "date": "2026-09-15",
-          "week": "2",
-          "weekLabel": "Week 2",
-          "topics": [
-            "arrays",
-            "linked-lists",
-            "memory"
-          ],
-          "notesHtml": "<h3>Arrays</h3>\n<p>Contiguous memory. Index arithmetic gives O(1) random access, and traversal is fast for a reason people often forget: <strong>cache locality</strong>. The CPU pulls in a whole cache line at a time, so the next element is usually already there.</p>\n<p>Insert or delete in the middle costs O(n) because everything after it shifts.</p>\n<h3>Linked lists</h3>\n<p>Each node holds a value plus a pointer. Insert and delete are O(1) — but only <em>if you already hold a reference to the node</em>. Finding that node is O(n), which quietly cancels the advantage in most real code.</p>\n<p>Nodes are scattered across memory, so every hop is a potential cache miss. In practice an array often beats a linked list even on workloads the textbook says favour lists.</p>\n<h3>Choosing between them</h3>\n<ol>\n<li>Need random access by index? Array.</li>\n<li>Iterating a lot? Array — locality wins.</li>\n<li>Splicing nodes you already hold, constantly? Linked list.</li>\n<li>Unsure? Array. It's the better default more often than not.</li>\n</ol>",
-          "resources": [
-            {
-              "label": "Lecture slides (PDF)",
-              "url": "#"
-            },
-            {
-              "label": "Recording",
-              "url": "#"
-            }
-          ],
-          "flashcards": [
-            {
-              "q": "Why is array traversal usually faster than linked-list traversal?",
-              "a": "Cache locality — array elements sit in contiguous memory, so the CPU loads several at once instead of chasing pointers."
-            },
-            {
-              "q": "When is a linked list genuinely the better choice?",
-              "a": "When you already hold a reference to the node and are inserting or removing frequently at that position."
-            },
-            {
-              "q": "What is the cost of inserting into the middle of an array?",
-              "a": "O(n), because every element after the insertion point has to shift."
-            }
-          ],
-          "searchText": "arrays & linked lists trade-offs, cache locality, and when a linked list is actually worth it arrays linked-lists memory arrays contiguous memory. index arithmetic gives o(1) random access, and traversal is fast for a reason people often forget: cache locality . the cpu pulls in a whole cache line at a time, so the next element is usually already there. insert or delete in the middle costs o(n) because everything after it shifts. linked lists each node holds a value plus a pointer. insert and delete are o(1) — but only if you already hold a reference to the node . finding that node is o(n), which quietly cancels the advantage in most real code. nodes are scattered across memory, so every hop is a potential cache miss. in practice an array often beats a linked list even on workloads the textbook says favour lists. choosing between them need random access by index? array. iterating a lot? array — locality wins. splicing nodes you already hold, constantly? linked list. unsure? array. it's the better default more often than not. why is array traversal usually faster than linked-list traversal? cache locality — array elements sit in contiguous memory, so the cpu loads several at once instead of chasing pointers. when is a linked list genuinely the better choice? when you already hold a reference to the node and are inserting or removing frequently at that position. what is the cost of inserting into the middle of an array? o(n), because every element after the insertion point has to shift."
-        },
-        {
-          "id": "week-03-stacks-queues-deques",
-          "title": "Stacks, Queues & Deques",
-          "summary": "Ring buffers and the monotonic stack trick",
-          "date": "2026-09-22",
-          "week": "3",
-          "weekLabel": "Week 3",
-          "topics": [
-            "stacks",
-            "queues",
-            "ring-buffer"
-          ],
-          "notesHtml": "<h3>Stack</h3>\n<p>Last in, first out. Push and pop at one end, both O(1). Backing it with an array is almost always the right call.</p>\n<h3>Queue</h3>\n<p>First in, first out. The naive array version is a trap: dequeuing from the front shifts everything, making it O(n).</p>\n<h3>Ring buffer</h3>\n<p>Fix the queue by wrapping indices around a fixed-size array:</p>\n<pre><code>head ──▶ [ _ , b , c , d , _ ]  ◀── tail\n          0   1   2   3   4</code></pre>\n<p>Both ends move in O(1) and nothing shifts. One catch: when <code>head == tail</code>, is the buffer full or empty? Two standard fixes — keep an explicit count, or deliberately leave one slot unused.</p>\n<h3>Monotonic stack</h3>\n<p>A stack kept in sorted order as you scan. It solves \"next greater element\" in a single pass. Each element is pushed at most once and popped at most once, so the whole scan is <strong>O(n)</strong> even though it looks nested.</p>",
-          "resources": [
-            {
-              "label": "Lecture slides (PDF)",
-              "url": "#"
-            },
-            {
-              "label": "Recording",
-              "url": "#"
-            },
-            {
-              "label": "Lab 3 starter code",
-              "url": "#"
-            }
-          ],
-          "flashcards": [
-            {
-              "q": "Why is a monotonic stack O(n) and not O(n²)?",
-              "a": "Each element is pushed at most once and popped at most once across the whole scan."
-            },
-            {
-              "q": "What ambiguity does head == tail create in a ring buffer?",
-              "a": "It can mean either full or empty — resolve it with an explicit count or by leaving one slot unused."
-            },
-            {
-              "q": "What's wrong with implementing a queue as a plain array you shift?",
-              "a": "Dequeuing from the front shifts every remaining element, making it O(n) per operation."
-            }
-          ],
-          "searchText": "stacks, queues & deques ring buffers and the monotonic stack trick stacks queues ring-buffer stack last in, first out. push and pop at one end, both o(1). backing it with an array is almost always the right call. queue first in, first out. the naive array version is a trap: dequeuing from the front shifts everything, making it o(n). ring buffer fix the queue by wrapping indices around a fixed-size array: head ──▶ [ _ , b , c , d , _ ] ◀── tail 0 1 2 3 4 both ends move in o(1) and nothing shifts. one catch: when head == tail , is the buffer full or empty? two standard fixes — keep an explicit count, or deliberately leave one slot unused. monotonic stack a stack kept in sorted order as you scan. it solves \"next greater element\" in a single pass. each element is pushed at most once and popped at most once, so the whole scan is o(n) even though it looks nested. why is a monotonic stack o(n) and not o(n²)? each element is pushed at most once and popped at most once across the whole scan. what ambiguity does head == tail create in a ring buffer? it can mean either full or empty — resolve it with an explicit count or by leaving one slot unused. what's wrong with implementing a queue as a plain array you shift? dequeuing from the front shifts every remaining element, making it o(n) per operation."
+          "searchText": "example lecture — limits a sample showing the format. delete this file once you add your own. example limits calculus this lecture is here to show you what a lecture file looks like. open data/lectures/math/example-lecture.md and compare it with this page. what a limit actually says lim(x→a) f(x) = l means: we can get f(x) as close to l as we like by taking x close enough to a. note what it does not say — nothing about f(a) itself. the function needn't even be defined there. why 0/0 isn't an answer when substitution gives 0/0, that's an indeterminate form — it means \"not enough information yet\", not \"undefined\". do more work: factor and cancel multiply by the conjugate (when roots are involved) divide through by the highest power of x (for limits at infinity) for example: lim(x→2) (x² − 4)/(x − 2) = lim(x→2) (x − 2)(x + 2)/(x − 2) = lim(x→2) (x + 2) = 4 the cancellation is legal because x ≠ 2 while approaching 2 — we never actually divide by zero. a limit exists only if the left-hand and right-hand limits agree. if they disagree, the limit does not exist, no matter how well-behaved each side is. what does 0/0 tell you when evaluating a limit? nothing yet — it's an indeterminate form, meaning you need to factor, rationalise or otherwise simplify before concluding. when does a limit fail to exist? when the left-hand and right-hand limits disagree. does lim(x→a) f(x) depend on the value of f(a)? no. the limit describes behaviour approaching a; f(a) may differ or be undefined entirely."
         }
       ]
     },
     {
-      "id": "math235",
-      "code": "MATH 235",
-      "name": "Linear Algebra II",
-      "instructor": "Dr. L. Chen",
+      "id": "physics",
+      "code": "PHYS",
+      "name": "Physics",
+      "instructor": "",
       "term": "Fall 2026",
       "lectures": [
         {
-          "id": "week-01-vector-spaces",
-          "title": "Vector Spaces & Subspaces",
-          "summary": "Axioms, subspace test, span and linear independence",
-          "date": "2026-09-09",
-          "week": "1",
-          "weekLabel": "Week 1",
+          "id": "example-lecture",
+          "title": "Example lecture — Newton's Laws",
+          "summary": "A sample showing the format. Delete this file once you add your own.",
+          "date": "",
+          "week": "0",
+          "weekLabel": "Week 0",
           "topics": [
-            "vector-spaces",
-            "subspaces",
-            "span"
+            "example",
+            "forces",
+            "newton"
           ],
-          "notesHtml": "<h3>What makes a vector space</h3>\n<p>A set V with addition and scalar multiplication satisfying the eight axioms. In practice you rarely check all eight — you usually show something <em>is</em> a subspace of a space you already trust.</p>\n<h3>The subspace test</h3>\n<p>A non-empty subset W of V is a subspace if and only if:</p>\n<ol>\n<li>The zero vector is in W.</li>\n<li>W is closed under addition.</li>\n<li>W is closed under scalar multiplication.</li>\n</ol>\n<p>Checking 1 first is the fastest way to rule things out — if the zero vector isn't there, stop.</p>\n<h3>Span and independence</h3>\n<ul>\n<li><strong>span(S)</strong> is the set of all linear combinations of vectors in S. It is always a subspace.</li>\n<li>A set is <strong>linearly independent</strong> when the only linear combination equal to zero is the trivial one, all coefficients zero.</li>\n</ul>\n<blockquote><p>A basis is exactly a set that is both independent and spans the space — the smallest spanning set, and the largest independent set, at once.</p></blockquote>",
+          "notesHtml": "<p>This lecture is here to show you what a lecture file looks like. Open <code>data/lectures/physics/example-lecture.md</code> and compare it with this page.</p>\n<h3>The three laws</h3>\n<ol>\n<li><strong>Inertia</strong> — a body keeps its velocity unless a net external force acts. Note <em>velocity</em>, not speed: turning requires a force too.</li>\n<li><strong>F = ma</strong> — net force equals mass times acceleration. Both F and a are vectors, and they point the same way.</li>\n<li><strong>Action and reaction</strong> — forces come in equal, opposite pairs acting on <em>different</em> bodies.</li>\n</ol>\n<h3>The mistake almost everyone makes</h3>\n<p>Third-law pairs act on <strong>different objects</strong>, so they never cancel each other. A book resting on a table:</p>\n<table><thead><tr><th>Force</th><th>Acts on</th><th>Paired with</th></tr></thead><tbody><tr><td>Earth pulls book down</td><td>book</td><td>book pulls Earth up</td></tr><tr><td>Table pushes book up</td><td>book</td><td>book pushes table down</td></tr></tbody></table>\n<p>The book stays still because the two forces <em>on the book</em> balance — not because of the third law.</p>\n<h3>Drawing the free-body diagram</h3>\n<p>Draw the object alone. Add only forces acting <strong>on</strong> it. Choose axes along the motion where possible. Then apply F = ma per axis.</p>\n<blockquote><p>Nearly every mechanics problem that goes wrong went wrong in the free-body diagram. Draw it before touching algebra.</p></blockquote>",
           "resources": [
             {
-              "label": "Lecture slides (PDF)",
+              "label": "Slides",
               "url": "#"
             },
             {
-              "label": "Textbook §4.1–4.3",
+              "label": "Problem set",
               "url": "#"
             }
           ],
           "flashcards": [
             {
-              "q": "What are the three conditions of the subspace test?",
-              "a": "Contains the zero vector, closed under addition, closed under scalar multiplication."
+              "q": "Why don't Newton's third-law pairs cancel out?",
+              "a": "They act on different bodies. Only forces acting on the same body can balance."
             },
             {
-              "q": "Define linear independence.",
-              "a": "The only linear combination of the vectors equal to zero is the one where every coefficient is zero."
+              "q": "What does the first law say about an object moving in a circle at constant speed?",
+              "a": "It is accelerating — velocity is a vector and its direction changes, so a net force must act."
             },
             {
-              "q": "What is a basis?",
-              "a": "A set that is both linearly independent and spans the space."
+              "q": "What is the first step in almost any mechanics problem?",
+              "a": "Draw a free-body diagram of the object alone, showing only the forces acting on it."
             }
           ],
-          "searchText": "vector spaces & subspaces axioms, subspace test, span and linear independence vector-spaces subspaces span what makes a vector space a set v with addition and scalar multiplication satisfying the eight axioms. in practice you rarely check all eight — you usually show something is a subspace of a space you already trust. the subspace test a non-empty subset w of v is a subspace if and only if: the zero vector is in w. w is closed under addition. w is closed under scalar multiplication. checking 1 first is the fastest way to rule things out — if the zero vector isn't there, stop. span and independence span(s) is the set of all linear combinations of vectors in s. it is always a subspace. a set is linearly independent when the only linear combination equal to zero is the trivial one, all coefficients zero. a basis is exactly a set that is both independent and spans the space — the smallest spanning set, and the largest independent set, at once. what are the three conditions of the subspace test? contains the zero vector, closed under addition, closed under scalar multiplication. define linear independence. the only linear combination of the vectors equal to zero is the one where every coefficient is zero. what is a basis? a set that is both linearly independent and spans the space."
+          "searchText": "example lecture — newton's laws a sample showing the format. delete this file once you add your own. example forces newton this lecture is here to show you what a lecture file looks like. open data/lectures/physics/example-lecture.md and compare it with this page. the three laws inertia — a body keeps its velocity unless a net external force acts. note velocity , not speed: turning requires a force too. f = ma — net force equals mass times acceleration. both f and a are vectors, and they point the same way. action and reaction — forces come in equal, opposite pairs acting on different bodies. the mistake almost everyone makes third-law pairs act on different objects , so they never cancel each other. a book resting on a table: force acts on paired with earth pulls book down book book pulls earth up table pushes book up book book pushes table down the book stays still because the two forces on the book balance — not because of the third law. drawing the free-body diagram draw the object alone. add only forces acting on it. choose axes along the motion where possible. then apply f = ma per axis. nearly every mechanics problem that goes wrong went wrong in the free-body diagram. draw it before touching algebra. why don't newton's third-law pairs cancel out? they act on different bodies. only forces acting on the same body can balance. what does the first law say about an object moving in a circle at constant speed? it is accelerating — velocity is a vector and its direction changes, so a net force must act. what is the first step in almost any mechanics problem? draw a free-body diagram of the object alone, showing only the forces acting on it."
+        }
+      ]
+    },
+    {
+      "id": "chemistry",
+      "code": "CHEM",
+      "name": "Chemistry",
+      "instructor": "",
+      "term": "Fall 2026",
+      "lectures": [
+        {
+          "id": "example-lecture",
+          "title": "Example lecture — Periodic Trends",
+          "summary": "A sample showing the format. Delete this file once you add your own.",
+          "date": "",
+          "week": "0",
+          "weekLabel": "Week 0",
+          "topics": [
+            "example",
+            "periodic-table",
+            "atomic-radius"
+          ],
+          "notesHtml": "<p>This lecture is here to show you what a lecture file looks like. Open <code>data/lectures/chemistry/example-lecture.md</code> and compare it with this page.</p>\n<h3>One idea explains most of the trends</h3>\n<p>Two competing effects:</p>\n<ul>\n<li><strong>Nuclear charge</strong> — more protons pull electrons in harder</li>\n<li><strong>Shielding</strong> — inner electrons partially block that pull from outer ones</li>\n</ul>\n<p>The balance between them is called the <em>effective nuclear charge</em>, Z_eff. Almost every trend below follows from it.</p>\n<h3>The trends</h3>\n<table><thead><tr><th>Property</th><th>Across a period (→)</th><th>Down a group (↓)</th></tr></thead><tbody><tr><td>Atomic radius</td><td>decreases</td><td>increases</td></tr><tr><td>Ionisation energy</td><td>increases</td><td>decreases</td></tr><tr><td>Electronegativity</td><td>increases</td><td>decreases</td></tr></tbody></table>\n<p>Across a period you add protons without adding a shell, so Z_eff rises and the atom contracts. Down a group you add a whole shell, so distance and shielding both increase and the outer electrons are held more loosely.</p>\n<h3>Why radius shrinks as you go right</h3>\n<p>It looks backwards — you're adding electrons, so shouldn't it grow? No: the added electrons go into the <em>same</em> shell while protons keep accumulating. The stronger pull wins, and the shell is drawn inward.</p>\n<blockquote><p>If you remember only one thing: same shell, more protons → smaller atom.</p></blockquote>",
+          "resources": [
+            {
+              "label": "Slides",
+              "url": "#"
+            },
+            {
+              "label": "Periodic table reference",
+              "url": "#"
+            }
+          ],
+          "flashcards": [
+            {
+              "q": "Why does atomic radius decrease across a period?",
+              "a": "Electrons are added to the same shell while protons accumulate, so effective nuclear charge rises and pulls the shell inward."
+            },
+            {
+              "q": "What are the two competing effects behind most periodic trends?",
+              "a": "Nuclear charge pulling electrons in, and shielding by inner electrons reducing that pull."
+            },
+            {
+              "q": "How does ionisation energy change down a group, and why?",
+              "a": "It decreases — outer electrons are further from the nucleus and better shielded, so they're easier to remove."
+            }
+          ],
+          "searchText": "example lecture — periodic trends a sample showing the format. delete this file once you add your own. example periodic-table atomic-radius this lecture is here to show you what a lecture file looks like. open data/lectures/chemistry/example-lecture.md and compare it with this page. one idea explains most of the trends two competing effects: nuclear charge — more protons pull electrons in harder shielding — inner electrons partially block that pull from outer ones the balance between them is called the effective nuclear charge , z_eff. almost every trend below follows from it. the trends property across a period (→) down a group (↓) atomic radius decreases increases ionisation energy increases decreases electronegativity increases decreases across a period you add protons without adding a shell, so z_eff rises and the atom contracts. down a group you add a whole shell, so distance and shielding both increase and the outer electrons are held more loosely. why radius shrinks as you go right it looks backwards — you're adding electrons, so shouldn't it grow? no: the added electrons go into the same shell while protons keep accumulating. the stronger pull wins, and the shell is drawn inward. if you remember only one thing: same shell, more protons → smaller atom. why does atomic radius decrease across a period? electrons are added to the same shell while protons accumulate, so effective nuclear charge rises and pulls the shell inward. what are the two competing effects behind most periodic trends? nuclear charge pulling electrons in, and shielding by inner electrons reducing that pull. how does ionisation energy change down a group, and why? it decreases — outer electrons are further from the nucleus and better shielded, so they're easier to remove."
+        }
+      ]
+    },
+    {
+      "id": "compsci",
+      "code": "CS",
+      "name": "Computer Science",
+      "instructor": "",
+      "term": "Fall 2026",
+      "lectures": [
+        {
+          "id": "example-lecture",
+          "title": "Example lecture — Loops in Java",
+          "summary": "A sample showing the format. Delete this file once you add your own.",
+          "date": "",
+          "week": "0",
+          "weekLabel": "Week 0",
+          "topics": [
+            "example",
+            "java",
+            "loops"
+          ],
+          "notesHtml": "<p>This lecture is here to show you what a lecture file looks like. Open <code>data/lectures/compsci/example-lecture.md</code> next to this page and compare the two — everything you see here came from that file.</p>\n<h3>The three loops</h3>\n<p>A <code>for</code> loop when you know how many times:</p>\n<pre><code class=\"lang-java\">for (int i = 0; i &lt; 5; i++) {\n    System.out.println(i);\n}</code></pre>\n<p>A <code>while</code> loop when you don't:</p>\n<pre><code class=\"lang-java\">while (scanner.hasNextLine()) {\n    process(scanner.nextLine());\n}</code></pre>\n<p>A <code>do while</code> loop when the body must run <strong>at least once</strong> — the condition is checked at the bottom, not the top.</p>\n<h3>Off-by-one errors</h3>\n<p>The classic mistake is <code>&lt;=</code> where you meant <code>&lt;</code>:</p>\n<table><thead><tr><th>Condition</th><th>Runs for i =</th><th>Iterations</th></tr></thead><tbody><tr><td><code>i &lt; 5</code></td><td>0, 1, 2, 3, 4</td><td>5</td></tr><tr><td><code>i &lt;= 5</code></td><td>0, 1, 2, 3, 4, 5</td><td>6</td></tr></tbody></table>\n<blockquote><p>When a loop runs one time too many, check the comparison operator first. It's the culprit far more often than the loop body.</p></blockquote>",
+          "resources": [
+            {
+              "label": "Slides",
+              "url": "#"
+            },
+            {
+              "label": "Recording",
+              "url": "#"
+            }
+          ],
+          "flashcards": [
+            {
+              "q": "When would you use a do-while loop instead of a while loop?",
+              "a": "When the body must run at least once, because the condition is checked after the first iteration rather than before it."
+            },
+            {
+              "q": "Why does a for loop with the condition i <= 5, starting at 0, run six times?",
+              "a": "It includes i = 5 as well as 0 through 4 — `<=` adds one extra iteration compared with `<`."
+            },
+            {
+              "q": "What goes in the three parts of a for loop header?",
+              "a": "Initialisation, the condition checked before each pass, and the update run after each pass."
+            }
+          ],
+          "searchText": "example lecture — loops in java a sample showing the format. delete this file once you add your own. example java loops this lecture is here to show you what a lecture file looks like. open data/lectures/compsci/example-lecture.md next to this page and compare the two — everything you see here came from that file. the three loops a for loop when you know how many times: for (int i = 0; i &lt; 5; i++) { system.out.println(i); } a while loop when you don't: while (scanner.hasnextline()) { process(scanner.nextline()); } a do while loop when the body must run at least once — the condition is checked at the bottom, not the top. off-by-one errors the classic mistake is &lt;= where you meant &lt; : condition runs for i = iterations i &lt; 5 0, 1, 2, 3, 4 5 i &lt;= 5 0, 1, 2, 3, 4, 5 6 when a loop runs one time too many, check the comparison operator first. it's the culprit far more often than the loop body. when would you use a do-while loop instead of a while loop? when the body must run at least once, because the condition is checked after the first iteration rather than before it. why does a for loop with the condition i <= 5, starting at 0, run six times? it includes i = 5 as well as 0 through 4 — `<=` adds one extra iteration compared with `<`. what goes in the three parts of a for loop header? initialisation, the condition checked before each pass, and the update run after each pass."
         }
       ]
     }
@@ -220,5 +226,5 @@ window.CONTENT = {
     }
   ],
   "template": "---\ntitle: \nweek: \ndate: \nsummary: \ntopics: []\n---\n\n## Notes\n\n\n\n## Resources\n\n- [Slides](#)\n- [Recording](#)\n\n## Flashcards\n\nQ: \nA: \n",
-  "builtAt": "2026-08-18T20:57:41.234Z"
+  "builtAt": "2026-08-18T23:17:48.413Z"
 };
