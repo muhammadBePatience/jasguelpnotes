@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture Hub — Modern dark style</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#151b23; --panel2:#1b232d; --ink:#e6edf3; --muted:#8b949e;
+    --line:#252d38; --accent:#7c8cff; --accent-soft:#1c2340;
+    --ok:#3fb950; --ok-soft:#122119; --warn:#d29922; --warn-soft:#221b0f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  a{color:var(--accent)}
+  .wrap{display:grid;grid-template-columns:264px 1fr;min-height:100vh}
+
+  aside{background:var(--panel);border-right:1px solid var(--line);padding:22px 16px}
+  .brand{font-size:17px;font-weight:700;letter-spacing:-.3px;display:flex;align-items:center;gap:9px}
+  .dot{width:9px;height:9px;border-radius:3px;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .brand small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);font-weight:500;margin-top:3px}
+  .term{margin:26px 0 8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .course{display:block;width:100%;text-align:left;border:1px solid transparent;background:none;
+    cursor:pointer;padding:10px;border-radius:9px;color:var(--ink);font-size:14px;margin-bottom:3px}
+  .course:hover{background:var(--panel2)}
+  .course.active{background:var(--accent-soft);border-color:#2f3a63;color:#fff}
+  .course .code{font-size:11px;color:var(--muted);display:block;letter-spacing:.04em}
+  .course.active .code{color:var(--accent)}
+  .bar{height:4px;background:#222b36;border-radius:99px;margin-top:8px;overflow:hidden}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#4fd1c5);border-radius:99px}
+
+  main{padding:30px 38px 60px;max-width:1020px}
+  .crumb{font-size:12px;color:var(--muted);margin-bottom:6px;letter-spacing:.03em}
+  h1{margin:0 0 4px;font-size:28px;letter-spacing:-.6px}
+  .sub{color:var(--muted);margin:0 0 22px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:26px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat b{display:block;font-size:24px;font-weight:700;letter-spacing:-.5px}
+  .stat span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  .toolbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  input[type=search]{flex:1;min-width:200px;padding:10px 13px;border:1px solid var(--line);
+    border-radius:9px;background:var(--panel);font-size:14px;color:var(--ink);outline:none}
+  input[type=search]:focus{border-color:var(--accent)}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:99px;padding:8px 15px;
+    font-size:13px;cursor:pointer;color:var(--muted)}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#0d1117;font-weight:600}
+
+  .lec{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+  .lec.open{border-color:#2f3a63}
+  .lec-head{display:flex;align-items:center;gap:14px;padding:15px 16px;cursor:pointer}
+  .lec-head:hover{background:var(--panel2)}
+  .wk{font-size:11px;color:var(--muted);width:54px;flex:none;letter-spacing:.05em;text-transform:uppercase}
+  .lec-title{flex:1;font-weight:600}
+  .lec-title em{display:block;font-style:normal;font-weight:400;font-size:13px;color:var(--muted)}
+  .tag{font-size:11px;padding:4px 10px;border-radius:99px;white-space:nowrap;border:1px solid transparent}
+  .t-done{background:var(--ok-soft);color:var(--ok);border-color:#1c3a26}
+  .t-todo{background:var(--warn-soft);color:var(--warn);border-color:#3a2f14}
+  .lec-body{display:none;border-top:1px solid var(--line);padding:18px 16px 20px;background:#111820}
+  .lec.open .lec-body{display:block}
+  .lec-body h3{margin:0 0 9px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .notes{margin:0 0 20px;padding-left:18px;color:#c3ccd6}
+  .notes li{margin-bottom:5px}
+  .res{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .res a{text-decoration:none;font-size:13px;border:1px solid var(--line);background:var(--panel);
+    border-radius:8px;padding:8px 13px;color:var(--ink)}
+  .res a:hover{border-color:var(--accent);color:var(--accent)}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:10px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:15px;
+    cursor:pointer;min-height:92px;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .card .q{font-weight:600;font-size:14px}
+  .card .a{font-size:13px;color:var(--muted);margin-top:9px;display:none}
+  .card.flip{background:var(--accent-soft);border-color:#2f3a63}
+  .card.flip .a{display:block}
+  .card .hint{font-size:11px;color:#5d6673;margin-top:9px}
+  .card.flip .hint{display:none}
+  .doneBtn{margin-top:18px;border:1px solid var(--line);background:var(--panel);border-radius:8px;
+    padding:9px 15px;font-size:13px;cursor:pointer;color:var(--ink)}
+  .doneBtn:hover{border-color:var(--ok);color:var(--ok)}
+  .note{margin-top:34px;padding:14px 16px;border:1px solid #2f3a63;background:var(--accent-soft);
+    border-radius:10px;font-size:13px;color:#b8c2ff}
+  @media(max-width:820px){.wrap{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line)}main{padding:22px 18px 50px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside>
+    <div class="brand"><span class="dot"></span><span>Lecture Hub<small>Style B · Modern dark</small></span></div>
+    <div class="term">Fall 2026</div>
+    <div id="courses"></div>
+  </aside>
+  <main>
+    <div class="crumb" id="crumb"></div>
+    <h1 id="ctitle"></h1>
+    <p class="sub" id="csub"></p>
+    <div class="stats" id="stats"></div>
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="Search lectures, topics, notes…">
+      <button class="chip on" data-f="all">All</button>
+      <button class="chip" data-f="todo">To review</button>
+      <button class="chip" data-f="done">Reviewed</button>
+    </div>
+    <div id="list"></div>
+    <div class="note"><b>Mockup only.</b> Sample data, one course wired up. Click a lecture to expand notes, resources and flashcards; click a flashcard to flip it.</div>
+  </main>
+</div>
+<script>
+const DATA=[
+ {code:"CS 240",name:"Data Structures & Algorithms",term:"Fall 2026",prof:"Dr. A. Rahman",lectures:[
+   {wk:"Week 1",t:"Asymptotic Analysis",d:"Big-O, Big-Θ, amortized cost",done:true,
+    notes:["Big-O is an upper bound; Θ is a tight bound.","Amortized ≠ average — it's a worst-case guarantee over a sequence.","Dynamic array push is O(1) amortized because of doubling."],
+    res:[["Slides (PDF)","#"],["Recording","#"],["Problem set 1","#"]],
+    cards:[["What does amortized O(1) mean?","Any sequence of n operations costs O(n) total, even if one operation is expensive."],["Θ vs O?","O is an upper bound; Θ means the bound is tight both above and below."]]},
+   {wk:"Week 2",t:"Linked Lists & Arrays",d:"Trade-offs, cache locality",done:true,
+    notes:["Arrays win on traversal because of cache locality.","Linked lists give O(1) insert only if you already hold the node."],
+    res:[["Slides (PDF)","#"],["Recording","#"]],
+    cards:[["When is a linked list actually faster?","When you already have a pointer to the position and are inserting/removing often."]]},
+   {wk:"Week 3",t:"Stacks, Queues, Deques",d:"Ring buffers, monotonic stacks",done:false,
+    notes:["A ring buffer avoids shifting on dequeue.","Monotonic stack solves 'next greater element' in O(n)."],
+    res:[["Slides (PDF)","#"],["Recording","#"],["Lab 3 starter code","#"]],
+    cards:[["Why a monotonic stack?","Each element is pushed and popped at most once → O(n) overall."],["Ring buffer full vs empty?","Keep a count, or leave one slot unused — head==tail is otherwise ambiguous."]]},
+   {wk:"Week 4",t:"Hash Tables",d:"Chaining, open addressing, load factor",done:false,
+    notes:["Load factor α = n/m drives expected probe length.","Open addressing degrades badly past α ≈ 0.7."],
+    res:[["Slides (PDF)","#"],["Midterm review sheet","#"]],
+    cards:[["Why resize a hash table?","To keep the load factor low so expected lookup stays O(1)."]]},
+   {wk:"Week 5",t:"Trees & Traversals",d:"BST, in/pre/post-order, balance",done:false,
+    notes:["In-order traversal of a BST yields sorted output.","Unbalanced BST degenerates to a linked list — O(n) lookup."],
+    res:[["Slides (PDF)","#"],["Recording","#"]],
+    cards:[["Why balance a BST?","To keep height O(log n) so lookups stay logarithmic."]]}
+ ]},
+ {code:"MATH 235",name:"Linear Algebra II",term:"Fall 2026",prof:"Dr. L. Chen",lectures:[]},
+ {code:"PHYS 121",name:"Mechanics",term:"Fall 2026",prof:"Dr. S. Patel",lectures:[]},
+ {code:"ENGL 109",name:"Academic Writing",term:"Fall 2026",prof:"Dr. M. Odell",lectures:[]}
+];
+let ci=0, filter="all", query="";
+const $=s=>document.querySelector(s);
+
+function renderCourses(){
+  $("#courses").innerHTML=DATA.map((c,i)=>{
+    const t=c.lectures.length, d=c.lectures.filter(l=>l.done).length;
+    const p=t?Math.round(d/t*100):0;
+    return `<button class="course ${i===ci?'active':''}" data-i="${i}">
+      <span class="code">${c.code}</span>${c.name}
+      <span class="bar"><i style="width:${p}%"></i></span></button>`;
+  }).join("");
+  document.querySelectorAll(".course").forEach(b=>b.onclick=()=>{ci=+b.dataset.i;renderAll()});
+}
+function renderAll(){
+  const c=DATA[ci];
+  $("#crumb").textContent=`${c.term} · ${c.code}`;
+  $("#ctitle").textContent=c.name;
+  $("#csub").textContent=`${c.prof} · ${c.lectures.length} lectures`;
+  const t=c.lectures.length,d=c.lectures.filter(l=>l.done).length;
+  const cards=c.lectures.reduce((s,l)=>s+l.cards.length,0);
+  $("#stats").innerHTML=[[t,"Lectures"],[d,"Reviewed"],[t-d,"To review"],[cards,"Flashcards"]]
+    .map(([v,k])=>`<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+  renderList(); renderCourses();
+}
+function renderList(){
+  const c=DATA[ci];
+  const items=c.lectures.filter(l=>{
+    if(filter==="done"&&!l.done)return false;
+    if(filter==="todo"&&l.done)return false;
+    if(!query)return true;
+    const hay=(l.t+l.d+l.notes.join(" ")).toLowerCase();
+    return hay.includes(query);
+  });
+  if(!items.length){$("#list").innerHTML=`<div class="lec"><div class="lec-head"><span class="lec-title" style="color:#8b949e;font-weight:400">No lectures here yet.</span></div></div>`;return}
+  $("#list").innerHTML=items.map(l=>`
+   <div class="lec" data-i="${c.lectures.indexOf(l)}">
+    <div class="lec-head">
+      <span class="wk">${l.wk}</span>
+      <span class="lec-title">${l.t}<em>${l.d}</em></span>
+      <span class="tag ${l.done?'t-done':'t-todo'}">${l.done?'Reviewed':'To review'}</span>
+    </div>
+    <div class="lec-body">
+      <h3>Key points</h3>
+      <ul class="notes">${l.notes.map(n=>`<li>${n}</li>`).join("")}</ul>
+      <h3>Resources</h3>
+      <div class="res">${l.res.map(r=>`<a href="${r[1]}" onclick="return false">${r[0]}</a>`).join("")}</div>
+      <h3>Flashcards</h3>
+      <div class="cards">${l.cards.map(cd=>`<div class="card"><div class="q">${cd[0]}</div><div class="a">${cd[1]}</div><div class="hint">click to reveal</div></div>`).join("")}</div>
+      <button class="doneBtn">${l.done?'Mark as to review':'Mark as reviewed'}</button>
+    </div>
+   </div>`).join("");
+  document.querySelectorAll(".lec-head").forEach(h=>h.onclick=()=>h.parentElement.classList.toggle("open"));
+  document.querySelectorAll(".card").forEach(k=>k.onclick=e=>{e.stopPropagation();k.classList.toggle("flip")});
+  document.querySelectorAll(".doneBtn").forEach(b=>b.onclick=e=>{
+    e.stopPropagation();
+    const idx=+b.closest(".lec").dataset.i;
+    DATA[ci].lectures[idx].done=!DATA[ci].lectures[idx].done;
+    renderAll();
+  });
+}
+$("#q").oninput=e=>{query=e.target.value.toLowerCase().trim();renderList()};
+document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");filter=b.dataset.f;renderList();
+});
+renderAll();
+</script>
+</body>
+</html>

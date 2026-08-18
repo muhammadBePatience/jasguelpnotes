@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lecture Hub</title>
+  <meta name="description" content="University lecture notes, resources and flashcards — available offline.">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Lectures">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <!-- apply the saved theme before first paint, so there's no flash of the wrong one -->
+  <script>try{var t=JSON.parse(localStorage.getItem('lecturehub.v1')||'{}').theme;if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Menu">☰</button>
+    <span class="topbar-title">Lecture Hub</span>
+    <button class="icon-btn" id="topThemeBtn" type="button" aria-label="Switch theme">◐</button>
+  </header>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="content">
+      <div class="crumb" id="crumb"></div>
+      <h1 class="page-title" id="title">All courses</h1>
+      <p class="page-sub" id="sub"></p>
+
+      <div id="resume"></div>
+
+      <div class="stats" id="stats"></div>
+
+      <div class="toolbar">
+        <input type="search" class="search" id="search" placeholder="Search all lectures, topics and notes…">
+      </div>
+
+      <div id="results"></div>
+      <div id="courses"></div>
+    </main>
+  </div>
+
+  <script src="assets/js/content.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/page-index.js"></script>
+</body>
+</html>

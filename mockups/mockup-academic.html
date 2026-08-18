@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lecture Hub — Academic style</title>
+<style>
+  :root{
+    --bg:#f7f6f3; --panel:#ffffff; --ink:#1e2430; --muted:#6b7280;
+    --line:#e3e1dc; --accent:#1d4ed8; --accent-soft:#eaf0ff;
+    --ok:#15803d; --ok-soft:#e7f4ec; --warn:#b45309; --warn-soft:#fdf3e3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  h1,h2,h3,.serif{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;}
+  a{color:var(--accent)}
+  .wrap{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+
+  /* Sidebar */
+  aside{background:var(--panel);border-right:1px solid var(--line);padding:22px 18px}
+  .brand{font-family:"Iowan Old Style",Georgia,serif;font-size:20px;font-weight:600;letter-spacing:-.2px}
+  .brand small{display:block;font-family:inherit;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);font-weight:500;margin-top:4px}
+  .term{margin:26px 0 8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .course{display:block;width:100%;text-align:left;border:0;background:none;cursor:pointer;
+    padding:9px 10px;border-radius:7px;color:var(--ink);font-size:14px}
+  .course:hover{background:#f2f1ed}
+  .course.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .course .code{font-size:11px;color:var(--muted);display:block}
+  .course.active .code{color:var(--accent)}
+  .bar{height:4px;background:#eceae5;border-radius:99px;margin-top:7px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--accent);border-radius:99px}
+
+  /* Main */
+  main{padding:30px 38px 60px;max-width:1000px}
+  .crumb{font-size:12px;color:var(--muted);margin-bottom:6px}
+  h1{margin:0 0 4px;font-size:28px;letter-spacing:-.4px}
+  .sub{color:var(--muted);margin:0 0 22px}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;min-width:120px}
+  .stat b{display:block;font-size:22px;font-family:Georgia,serif}
+  .stat span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+  .toolbar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  input[type=search]{flex:1;min-width:200px;padding:9px 12px;border:1px solid var(--line);
+    border-radius:8px;background:var(--panel);font-size:14px;color:var(--ink)}
+  .chip{border:1px solid var(--line);background:var(--panel);border-radius:99px;padding:7px 14px;
+    font-size:13px;cursor:pointer;color:var(--muted)}
+  .chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  .lec{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+  .lec-head{display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer}
+  .lec-head:hover{background:#faf9f7}
+  .wk{font-family:Georgia,serif;font-size:12px;color:var(--muted);width:52px;flex:none}
+  .lec-title{flex:1;font-weight:600}
+  .lec-title em{display:block;font-style:normal;font-weight:400;font-size:13px;color:var(--muted)}
+  .tag{font-size:11px;padding:3px 9px;border-radius:99px;white-space:nowrap}
+  .t-done{background:var(--ok-soft);color:var(--ok)}
+  .t-todo{background:var(--warn-soft);color:var(--warn)}
+  .lec-body{display:none;border-top:1px solid var(--line);padding:18px 16px 20px;background:#fcfbfa}
+  .lec.open .lec-body{display:block}
+  .lec-body h3{margin:0 0 8px;font-size:15px}
+  .notes{margin:0 0 18px;padding-left:18px;color:#374151}
+  .notes li{margin-bottom:5px}
+  .res{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .res a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-size:13px;
+    border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:7px 12px;color:var(--ink)}
+  .res a:hover{border-color:var(--accent);color:var(--accent)}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+  .card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:8px;padding:14px;cursor:pointer;min-height:86px}
+  .card .q{font-weight:600;font-size:14px}
+  .card .a{font-size:13px;color:var(--muted);margin-top:8px;display:none}
+  .card.flip .a{display:block}
+  .card .hint{font-size:11px;color:#9ca3af;margin-top:8px}
+  .card.flip .hint{display:none}
+  .doneBtn{margin-top:16px;border:1px solid var(--line);background:var(--panel);border-radius:7px;
+    padding:8px 14px;font-size:13px;cursor:pointer;color:var(--ink)}
+  .doneBtn:hover{border-color:var(--ok);color:var(--ok)}
+  .note{margin-top:34px;padding:14px 16px;border-left:3px solid var(--accent);background:var(--accent-soft);
+    border-radius:0 8px 8px 0;font-size:13px;color:#1e3a8a}
+  @media(max-width:820px){.wrap{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line)}main{padding:22px 18px 50px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside>
+    <div class="brand">Lecture Hub<small>Style A · Academic</small></div>
+    <div class="term">Fall 2026</div>
+    <div id="courses"></div>
+  </aside>
+  <main>
+    <div class="crumb" id="crumb"></div>
+    <h1 id="ctitle"></h1>
+    <p class="sub" id="csub"></p>
+    <div class="stats" id="stats"></div>
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="Search lectures, topics, notes…">
+      <button class="chip on" data-f="all">All</button>
+      <button class="chip" data-f="todo">To review</button>
+      <button class="chip" data-f="done">Reviewed</button>
+    </div>
+    <div id="list"></div>
+    <div class="note"><b>Mockup only.</b> Sample data, one course wired up. Click a lecture to expand notes, resources and flashcards; click a flashcard to flip it.</div>
+  </main>
+</div>
+<script>
+const DATA=[
+ {code:"CS 240",name:"Data Structures & Algorithms",term:"Fall 2026",prof:"Dr. A. Rahman",lectures:[
+   {wk:"Week 1",t:"Asymptotic Analysis",d:"Big-O, Big-Θ, amortized cost",done:true,
+    notes:["Big-O is an upper bound; Θ is a tight bound.","Amortized ≠ average — it's a worst-case guarantee over a sequence.","Dynamic array push is O(1) amortized because of doubling."],
+    res:[["Slides (PDF)","#"],["Recording","#"],["Problem set 1","#"]],
+    cards:[["What does amortized O(1) mean?","Any sequence of n operations costs O(n) total, even if one operation is expensive."],["Θ vs O?","O is an upper bound; Θ means the bound is tight both above and below."]]},
+   {wk:"Week 2",t:"Linked Lists & Arrays",d:"Trade-offs, cache locality",done:true,
+    notes:["Arrays win on traversal because of cache locality.","Linked lists give O(1) insert only if you already hold the node."],
+    res:[["Slides (PDF)","#"],["Recording","#"]],
+    cards:[["When is a linked list actually faster?","When you already have a pointer to the position and are inserting/removing often."]]},
+   {wk:"Week 3",t:"Stacks, Queues, Deques",d:"Ring buffers, monotonic stacks",done:false,
+    notes:["A ring buffer avoids shifting on dequeue.","Monotonic stack solves 'next greater element' in O(n)."],
+    res:[["Slides (PDF)","#"],["Recording","#"],["Lab 3 starter code","#"]],
+    cards:[["Why a monotonic stack?","Each element is pushed and popped at most once → O(n) overall."],["Ring buffer full vs empty?","Keep a count, or leave one slot unused — head==tail is otherwise ambiguous."]]},
+   {wk:"Week 4",t:"Hash Tables",d:"Chaining, open addressing, load factor",done:false,
+    notes:["Load factor α = n/m drives expected probe length.","Open addressing degrades badly past α ≈ 0.7."],
+    res:[["Slides (PDF)","#"],["Midterm review sheet","#"]],
+    cards:[["Why resize a hash table?","To keep the load factor low so expected lookup stays O(1)."]]},
+   {wk:"Week 5",t:"Trees & Traversals",d:"BST, in/pre/post-order, balance",done:false,
+    notes:["In-order traversal of a BST yields sorted output.","Unbalanced BST degenerates to a linked list — O(n) lookup."],
+    res:[["Slides (PDF)","#"],["Recording","#"]],
+    cards:[["Why balance a BST?","To keep height O(log n) so lookups stay logarithmic."]]}
+ ]},
+ {code:"MATH 235",name:"Linear Algebra II",term:"Fall 2026",prof:"Dr. L. Chen",lectures:[]},
+ {code:"PHYS 121",name:"Mechanics",term:"Fall 2026",prof:"Dr. S. Patel",lectures:[]},
+ {code:"ENGL 109",name:"Academic Writing",term:"Fall 2026",prof:"Dr. M. Odell",lectures:[]}
+];
+let ci=0, filter="all", query="";
+const $=s=>document.querySelector(s);
+
+function renderCourses(){
+  $("#courses").innerHTML=DATA.map((c,i)=>{
+    const t=c.lectures.length, d=c.lectures.filter(l=>l.done).length;
+    const p=t?Math.round(d/t*100):0;
+    return `<button class="course ${i===ci?'active':''}" data-i="${i}">
+      <span class="code">${c.code}</span>${c.name}
+      <span class="bar"><i style="width:${p}%"></i></span></button>`;
+  }).join("");
+  document.querySelectorAll(".course").forEach(b=>b.onclick=()=>{ci=+b.dataset.i;renderAll()});
+}
+function renderAll(){
+  const c=DATA[ci];
+  $("#crumb").textContent=`${c.term} · ${c.code}`;
+  $("#ctitle").textContent=c.name;
+  $("#csub").textContent=`${c.prof} · ${c.lectures.length} lectures`;
+  const t=c.lectures.length,d=c.lectures.filter(l=>l.done).length;
+  const cards=c.lectures.reduce((s,l)=>s+l.cards.length,0);
+  $("#stats").innerHTML=[[t,"Lectures"],[d,"Reviewed"],[t-d,"To review"],[cards,"Flashcards"]]
+    .map(([v,k])=>`<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+  renderList(); renderCourses();
+}
+function renderList(){
+  const c=DATA[ci];
+  const items=c.lectures.filter(l=>{
+    if(filter==="done"&&!l.done)return false;
+    if(filter==="todo"&&l.done)return false;
+    if(!query)return true;
+    const hay=(l.t+l.d+l.notes.join(" ")).toLowerCase();
+    return hay.includes(query);
+  });
+  if(!items.length){$("#list").innerHTML=`<div class="lec"><div class="lec-head"><span class="lec-title" style="color:#6b7280;font-weight:400">No lectures here yet.</span></div></div>`;return}
+  $("#list").innerHTML=items.map((l,i)=>`
+   <div class="lec" data-i="${c.lectures.indexOf(l)}">
+    <div class="lec-head">
+      <span class="wk">${l.wk}</span>
+      <span class="lec-title">${l.t}<em>${l.d}</em></span>
+      <span class="tag ${l.done?'t-done':'t-todo'}">${l.done?'Reviewed':'To review'}</span>
+    </div>
+    <div class="lec-body">
+      <h3>Key points</h3>
+      <ul class="notes">${l.notes.map(n=>`<li>${n}</li>`).join("")}</ul>
+      <h3>Resources</h3>
+      <div class="res">${l.res.map(r=>`<a href="${r[1]}" onclick="return false">${r[0]}</a>`).join("")}</div>
+      <h3>Flashcards</h3>
+      <div class="cards">${l.cards.map(cd=>`<div class="card"><div class="q">${cd[0]}</div><div class="a">${cd[1]}</div><div class="hint">click to reveal</div></div>`).join("")}</div>
+      <button class="doneBtn">${l.done?'Mark as to review':'Mark as reviewed'}</button>
+    </div>
+   </div>`).join("");
+  document.querySelectorAll(".lec-head").forEach(h=>h.onclick=()=>h.parentElement.classList.toggle("open"));
+  document.querySelectorAll(".card").forEach(k=>k.onclick=e=>{e.stopPropagation();k.classList.toggle("flip")});
+  document.querySelectorAll(".doneBtn").forEach(b=>b.onclick=e=>{
+    e.stopPropagation();
+    const idx=+b.closest(".lec").dataset.i;
+    DATA[ci].lectures[idx].done=!DATA[ci].lectures[idx].done;
+    renderAll();
+  });
+}
+$("#q").oninput=e=>{query=e.target.value.toLowerCase().trim();renderList()};
+document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");filter=b.dataset.f;renderList();
+});
+renderAll();
+</script>
+</body>
+</html>
