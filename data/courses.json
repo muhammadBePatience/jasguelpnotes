@@ -7,19 +7,9 @@
     "tagline": "Every lecture, its notes, its resources and its flashcards — in one place."
   },
   "courses": [
-    {
-      "id": "cs240",
-      "code": "CS 240",
-      "name": "Data Structures & Algorithms",
-      "instructor": "Dr. A. Rahman",
-      "term": "Fall 2026"
-    },
-    {
-      "id": "math235",
-      "code": "MATH 235",
-      "name": "Linear Algebra II",
-      "instructor": "Dr. L. Chen",
-      "term": "Fall 2026"
-    }
+    { "id": "math",      "code": "MATH", "name": "Mathematics",      "instructor": "", "term": "Fall 2026" },
+    { "id": "physics",   "code": "PHYS", "name": "Physics",          "instructor": "", "term": "Fall 2026" },
+    { "id": "chemistry", "code": "CHEM", "name": "Chemistry",        "instructor": "", "term": "Fall 2026" },
+    { "id": "compsci",   "code": "CS",   "name": "Computer Science", "instructor": "", "term": "Fall 2026" }
   ]
 }

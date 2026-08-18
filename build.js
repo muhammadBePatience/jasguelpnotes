@@ -365,7 +365,14 @@ function build() {
     if (fs.existsSync(dir)) {
       files = fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort();
     } else {
-      console.warn(`  ! no folder data/lectures/${course.id} — course will show as empty`);
+      // Create it rather than complain — forgetting the folder, or naming it
+      // differently from the course id, used to give a silently empty course.
+      try {
+        fs.mkdirSync(dir, { recursive: true });
+        console.log(`  + created data/lectures/${course.id}/ — put ${course.code} lectures here`);
+      } catch (e) {
+        console.warn(`  ! could not create data/lectures/${course.id}: ${e.message}`);
+      }
     }
 
     const lectures = files.map((file) => {
