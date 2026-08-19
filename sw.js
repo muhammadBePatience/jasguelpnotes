@@ -12,7 +12,7 @@
    ========================================================================== */
 
 /* BUILD:VERSION */
-const VERSION = '7b35ce61';
+const VERSION = 'ae8bb509';
 /* /BUILD:VERSION */
 
 const CACHE = 'lecturehub-' + VERSION;
@@ -37,6 +37,7 @@ const PRECACHE = [
   "assets/js/store.js",
   "course.html",
   "files/README.md",
+  "files/math/1-02-intro-to-limits.pdf",
   "help.html",
   "index.html",
   "lecture.html",

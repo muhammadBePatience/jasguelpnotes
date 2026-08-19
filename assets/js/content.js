@@ -54,6 +54,54 @@ window.CONTENT = {
             }
           ],
           "searchText": "example lecture — limits a sample showing the format. delete this file once you add your own. example limits calculus this lecture is here to show you what a lecture file looks like. open data/lectures/math/example-lecture.md and compare it with this page. what a limit actually says lim(x→a) f(x) = l means: we can get f(x) as close to l as we like by taking x close enough to a. note what it does not say — nothing about f(a) itself. the function needn't even be defined there. why 0/0 isn't an answer when substitution gives 0/0, that's an indeterminate form — it means \"not enough information yet\", not \"undefined\". do more work: factor and cancel multiply by the conjugate (when roots are involved) divide through by the highest power of x (for limits at infinity) for example: lim(x→2) (x² − 4)/(x − 2) = lim(x→2) (x − 2)(x + 2)/(x − 2) = lim(x→2) (x + 2) = 4 the cancellation is legal because x ≠ 2 while approaching 2 — we never actually divide by zero. a limit exists only if the left-hand and right-hand limits agree. if they disagree, the limit does not exist, no matter how well-behaved each side is. what does 0/0 tell you when evaluating a limit? nothing yet — it's an indeterminate form, meaning you need to factor, rationalise or otherwise simplify before concluding. when does a limit fail to exist? when the left-hand and right-hand limits disagree. does lim(x→a) f(x) depend on the value of f(a)? no. the limit describes behaviour approaching a; f(a) may differ or be undefined entirely."
+        },
+        {
+          "id": "week-01-intro-to-limits",
+          "title": "Intro to Limits",
+          "summary": "What a limit is, one-sided limits, and reading them off a graph",
+          "date": "",
+          "week": "1",
+          "weekLabel": "Week 1",
+          "topics": [
+            "limits",
+            "one-sided-limits",
+            "piecewise",
+            "tangent"
+          ],
+          "notesHtml": "<p>The handout below is the blank lesson sheet — the examples are there to work through. These are the ideas behind it.</p>\n<h3>Where calculus came from</h3>\n<p>Two problems the ancients kept running into:</p>\n<ul>\n<li><strong>The area problem</strong> — finding the area of a shape that isn't made of straight lines. The Greeks approximated a circle with polygons; the Egyptians split the land around the Nile into rectangles. Both are the same trick: approximate with simple shapes, then take more and more of them.</li>\n<li><strong>The tangent problem</strong> — finding the <em>rate of change</em> at a single point, which is the slope of the tangent line there.</li>\n</ul>\n<h3>Why the tangent problem needs limits</h3>\n<p>To find a slope you need <strong>two</strong> points. But a tangent touches the curve at only one point, P. So you cheat: take a second point Q nearby on the curve, find the slope of the line PQ, then slide Q closer and closer to P.</p>\n<p>The slope of the tangent is what that value <em>approaches</em>. It's never actually computed at a single point — it's a limit.</p>\n<h3>What a limit actually is</h3>\n<blockquote><p>The limit of a function is the y-value the function approaches near a particular x-value.</p></blockquote>\n<p>Note \"near\", not \"at\". The function doesn't have to be defined at that x-value, and if it is, its value there can be something else entirely. The limit only cares about the behaviour on the way in.</p>\n<h3>One-sided limits</h3>\n<p>You can approach an x-value from either direction:</p>\n<table><thead><tr><th>Notation</th><th>Means</th></tr></thead><tbody><tr><td>lim as x→a⁻</td><td>approaching a from the <strong>left</strong> (smaller values)</td></tr><tr><td>lim as x→a⁺</td><td>approaching a from the <strong>right</strong> (larger values)</td></tr><tr><td>lim as x→a</td><td>the two-sided limit</td></tr></tbody></table>\n<p><strong>The two-sided limit exists only if both one-sided limits exist and are equal.</strong> If the graph jumps at x = a, the left and right limits disagree and the limit does not exist — even though both one-sided limits are perfectly fine on their own.</p>\n<p>Reading these off a graph: put your finger on the curve to the left of a and slide right — the height you head toward is the left limit. Then come in from the right for the right limit.</p>\n<h3>Piecewise functions</h3>\n<p>Absolute values are the usual source of these. |x − 2| splits at x = 2:</p>\n<pre><code>|x − 2| =  x − 2    when x ≥ 2\n         −(x − 2)   when x &lt; 2</code></pre>\n<p>That split point is exactly where the interesting limit questions live. For something like |x − 2|/(x − 2), the function equals +1 on one side and −1 on the other, so the left and right limits differ and the two-sided limit doesn't exist — even though the function is perfectly well behaved everywhere else.</p>\n<blockquote><p>Whenever you see an absolute value, rewrite it in piecewise form first. Nearly every limit question about it becomes obvious once you do.</p></blockquote>",
+          "resources": [
+            {
+              "label": "Lesson handout — Intro to Limits (PDF)",
+              "url": "files/math/1-02-intro-to-limits.pdf"
+            }
+          ],
+          "flashcards": [
+            {
+              "q": "What does the limit of a function describe?",
+              "a": "The y-value the function approaches near a particular x-value — its behaviour on the way in, not its value at that point."
+            },
+            {
+              "q": "Does a function have to be defined at x = a for the limit as x approaches a to exist?",
+              "a": "No. The limit only depends on behaviour near a, not on f(a), which may be different or undefined."
+            },
+            {
+              "q": "When does a two-sided limit fail to exist?",
+              "a": "When the left-hand and right-hand limits disagree — for example where the graph jumps."
+            },
+            {
+              "q": "What do the minus and plus signs mean in x→a⁻ and x→a⁺?",
+              "a": "Minus means approaching a from the left (smaller values), plus means from the right (larger values)."
+            },
+            {
+              "q": "Why do you need a limit to find the slope of a tangent?",
+              "a": "A slope needs two points, but a tangent touches at one. You take a nearby point Q, find the slope of PQ, and see what it approaches as Q slides toward P."
+            },
+            {
+              "q": "What's the first step when a limit question involves an absolute value?",
+              "a": "Rewrite the function in piecewise form — the split point is where the one-sided limits differ."
+            }
+          ],
+          "searchText": "intro to limits what a limit is, one-sided limits, and reading them off a graph limits one-sided-limits piecewise tangent the handout below is the blank lesson sheet — the examples are there to work through. these are the ideas behind it. where calculus came from two problems the ancients kept running into: the area problem — finding the area of a shape that isn't made of straight lines. the greeks approximated a circle with polygons; the egyptians split the land around the nile into rectangles. both are the same trick: approximate with simple shapes, then take more and more of them. the tangent problem — finding the rate of change at a single point, which is the slope of the tangent line there. why the tangent problem needs limits to find a slope you need two points. but a tangent touches the curve at only one point, p. so you cheat: take a second point q nearby on the curve, find the slope of the line pq, then slide q closer and closer to p. the slope of the tangent is what that value approaches . it's never actually computed at a single point — it's a limit. what a limit actually is the limit of a function is the y-value the function approaches near a particular x-value. note \"near\", not \"at\". the function doesn't have to be defined at that x-value, and if it is, its value there can be something else entirely. the limit only cares about the behaviour on the way in. one-sided limits you can approach an x-value from either direction: notation means lim as x→a⁻ approaching a from the left (smaller values) lim as x→a⁺ approaching a from the right (larger values) lim as x→a the two-sided limit the two-sided limit exists only if both one-sided limits exist and are equal. if the graph jumps at x = a, the left and right limits disagree and the limit does not exist — even though both one-sided limits are perfectly fine on their own. reading these off a graph: put your finger on the curve to the left of a and slide right — the height you head toward is the left limit. then come in from the right for the right limit. piecewise functions absolute values are the usual source of these. |x − 2| splits at x = 2: |x − 2| = x − 2 when x ≥ 2 −(x − 2) when x &lt; 2 that split point is exactly where the interesting limit questions live. for something like |x − 2|/(x − 2), the function equals +1 on one side and −1 on the other, so the left and right limits differ and the two-sided limit doesn't exist — even though the function is perfectly well behaved everywhere else. whenever you see an absolute value, rewrite it in piecewise form first. nearly every limit question about it becomes obvious once you do. what does the limit of a function describe? the y-value the function approaches near a particular x-value — its behaviour on the way in, not its value at that point. does a function have to be defined at x = a for the limit as x approaches a to exist? no. the limit only depends on behaviour near a, not on f(a), which may be different or undefined. when does a two-sided limit fail to exist? when the left-hand and right-hand limits disagree — for example where the graph jumps. what do the minus and plus signs mean in x→a⁻ and x→a⁺? minus means approaching a from the left (smaller values), plus means from the right (larger values). why do you need a limit to find the slope of a tangent? a slope needs two points, but a tangent touches at one. you take a nearby point q, find the slope of pq, and see what it approaches as q slides toward p. what's the first step when a limit question involves an absolute value? rewrite the function in piecewise form — the split point is where the one-sided limits differ."
         }
       ]
     },
@@ -226,5 +274,5 @@ window.CONTENT = {
     }
   ],
   "template": "---\ntitle: \nweek: \ndate: \nsummary: \ntopics: []\n---\n\n## Notes\n\n\n\n## Resources\n\n- [Slides](#)\n- [Recording](#)\n\n## Flashcards\n\nQ: \nA: \n",
-  "builtAt": "2026-08-18T23:17:48.413Z"
+  "builtAt": "2026-08-19T20:00:30.969Z"
 };

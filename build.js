@@ -362,17 +362,29 @@ function build() {
   const courses = (config.courses || []).map((course) => {
     const dir = path.join(DATA, 'lectures', course.id);
     let files = [];
+
     if (fs.existsSync(dir)) {
       files = fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort();
     } else {
-      // Create it rather than complain — forgetting the folder, or naming it
-      // differently from the course id, used to give a silently empty course.
+      // Create it rather than complain. Forgetting the folder — or naming it
+      // differently from the course id — was the easiest way to add a course
+      // and have it silently show up empty. Now the build just makes it.
       try {
         fs.mkdirSync(dir, { recursive: true });
         console.log(`  + created data/lectures/${course.id}/ — put ${course.code} lectures here`);
       } catch (e) {
         console.warn(`  ! could not create data/lectures/${course.id}: ${e.message}`);
       }
+    }
+
+    // And a matching files/<id>/ for slides, handouts and PDFs, so there's
+    // always somewhere obvious to drop a document for this course.
+    const filesDir = path.join(ROOT, 'files', course.id);
+    if (!fs.existsSync(filesDir)) {
+      try {
+        fs.mkdirSync(filesDir, { recursive: true });
+        console.log(`  + created files/${course.id}/ — put ${course.code} PDFs and slides here`);
+      } catch (e) { /* not fatal — the course just has nowhere to put documents yet */ }
     }
 
     const lectures = files.map((file) => {
